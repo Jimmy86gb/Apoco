@@ -4,8 +4,8 @@ public class AppMain {
 
 	public static void main(String[] args) {
 		
-		Controller control;
-		control = new Controller();
+		MainController control;
+		control = new MainController();
 		control.run();
 
 	}
