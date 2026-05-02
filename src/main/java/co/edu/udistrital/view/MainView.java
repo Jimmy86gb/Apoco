@@ -4,10 +4,24 @@
  */
 package co.edu.udistrital.view;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Jimmy86gb
  */
 public class MainView {
+    private Scanner sc;
     
+    public MainView(){
+        sc = new Scanner(System.in);
+    }
+    public String readData(String msg){
+        showMsg(msg);
+        String option = sc.nextLine();
+        return option;
+    }
+    public void showMsg(String msg){
+        System.out.println(msg);
+    }
 }
