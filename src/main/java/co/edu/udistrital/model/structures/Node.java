@@ -31,6 +31,11 @@ public class Node<T> {
     public Node<T> getNext() {
         return next;
     }
+    
+    public T getNextData(){
+        Node<T> next = getNext();
+        return next.getData();
+    }
 
     public void setNext(Node<T> next) {
         this.next = next;

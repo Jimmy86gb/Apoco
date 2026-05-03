@@ -51,6 +51,12 @@ public class SimpleList<T> {
     public void setSize(int size) {
         this.size = size;
     }
-    
+
+    public boolean isEmpty() {
+        if(getSize() == 0){
+            return true;
+        }
+        return false;
+    }
     
 }

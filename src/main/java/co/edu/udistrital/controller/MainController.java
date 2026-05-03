@@ -4,6 +4,8 @@ import co.edu.udistrital.view.MainView;
 import co.edu.udistrital.model.generator.DataGenerator;
 import co.edu.udistrital.model.structures.*;
 import co.edu.udistrital.model.entities.*;
+import co.edu.udistrital.model.sort.*;
+import java.util.Comparator;
         
 public class MainController {
     private MainView view;
@@ -55,14 +57,45 @@ public class MainController {
                     view.showMsg(msg);
                     actual = actual.getNext();
                 }
-                msg ="""
-                     --MENU APOCO--
-                     1. Menor a Mayor en dinero
-                     Elija un ordenamiento:""";
+                msg = """
+                      --MENU APOCO--
+                      1. Ordenar con Bubble Sort
+                      2. Ordenar con Quick Sort
+                      Elija un ordenamiento:""";
                 String option2 = view.readData(msg);
+
+                // se usa la interfaz sorter
+                Sorter<Politician> algorithm = null;
+
                 switch(option2){
                     case "1":
-                        
+                        algorithm = new BubbleSort<>();
+                        break;
+                    case "2":
+                        algorithm = new QuickSort<>();
+                        break;
+                    default:
+                        view.showMsg("Opción no válida.");
+                        return; 
+                }
+                // se envia la lista haciendo uso del comparator
+                int iterations = algorithm.sort(listP, new Comparator<Politician>() {
+                    @Override
+                    public int compare(Politician p1, Politician p2) {
+                        // orden de menor a mayor dinero a robar
+                        return Double.compare(p1.getMoneyToSteal(), p2.getMoneyToSteal());
+                    }
+                });
+
+                // mostrar resultados
+                view.showMsg("\n--RESULTADOS DEL ORDENAMIENTO--");
+                view.showMsg("Iteraciones realizadas: " + iterations);
+
+                Node<Politician> current = listP.getHead();
+                while(current != null) {
+                    Politician p = current.getData();
+                    view.showMsg(p.getName() + " | Dinero: $" + p.getMoneyToSteal());
+                    current = current.getNext();
                 }
 
         }
